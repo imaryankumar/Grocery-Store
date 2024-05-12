@@ -3,7 +3,7 @@ import ConnectDB from "@/libs/DBConnect";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import userAuthModal from "@/models/auth.model";
-export const POST = async (request) => {
+export const PATCH = async (request) => {
   await ConnectDB();
   try {
     const { password, conpassword, token } = await request.json();
@@ -19,19 +19,19 @@ export const POST = async (request) => {
         { status: 401 }
       );
     }
-    // const hashConPassword = await bcrypt.hash(password, 10);
-    // const decoded = jwt.verify(token, process.env.JWT_SECRET_ID);
-    // const { email } = decoded;
-    // const resetPassword = await userAuthModal.findByIdAndUpdate(
-    //   { email },
-    //   {
-    //     password: hashConPassword,
-    //   },
-    //   { new: true }
-    // );
-    // if (!resetPassword) {
-    //   return NextResponse.json({ message: "User not found" }, { status: 404 });
-    // }
+    const hashConPassword = await bcrypt.hash(password, 10);
+    const decoded = jwt.decode(token);
+    const userId = decoded.token;
+    const resetPassword = await userAuthModal.findByIdAndUpdate(
+      userId,
+      {
+        password: hashConPassword,
+      },
+      { new: true }
+    );
+    if (!resetPassword) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
     return NextResponse.json(
       { message: "Reset Password Successfully" },
       { status: 400 }
