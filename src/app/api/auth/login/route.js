@@ -45,3 +45,17 @@ export const POST = async (request) => {
     return NextResponse.json({ message: "Invalid" }, { status: 400 });
   }
 };
+
+export const GET = async (request) => {
+  await ConnectDB();
+  try {
+    const userFind = await userAuthModal.find({});
+    return NextResponse.json(
+      { message: "All Users", userFind },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json({ message: "Invalid" }, { status: 400 });
+  }
+};
