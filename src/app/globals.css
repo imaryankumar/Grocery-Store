@@ -5,3 +5,6 @@
 .display-flex {
   @apply flex items-center justify-center;
 }
+.react-multi-carousel-dot-list {
+  bottom: 25px !important;
+}

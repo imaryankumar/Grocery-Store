@@ -4,13 +4,18 @@ import { RiShoppingBag3Line } from "react-icons/ri";
 import { BiCategory } from "react-icons/bi";
 import { IoSearchOutline } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const Headers = () => {
   const [isShowCategory, setIsShowCategory] = useState(false);
   const categoryRef = useRef();
+  const router = useRouter();
   const IsShowCategorySection = () => {
     setIsShowCategory((prev) => !prev);
+  };
+  const onLoginBtnHandler = () => {
+    router.push("/login");
   };
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -26,7 +31,7 @@ const Headers = () => {
   return (
     <nav className="w-full flex items-center justify-between px-10 bg-white shadow h-20 text-xl">
       <div className="text-3xl font-medium display-flex gap-8">
-        <div className="display-flex gap-1 text-yellow-600  ">
+        <Link href={"/"} className="display-flex gap-1 text-yellow-600  ">
           <span>
             <Image
               src={"/Images/Logoicon.png"}
@@ -35,10 +40,10 @@ const Headers = () => {
               height={50}
             />
           </span>
-          <Link href={"/"} className="leading-7">
+          <div className="leading-7">
             Grocery <br /> <span className="text-green-500">Store</span>
-          </Link>
-        </div>
+          </div>
+        </Link>
         <div className="w-auto relative" ref={categoryRef}>
           <div
             className="display-flex gap-2 bg-slate-200 py-2 px-6 rounded-full relative cursor-pointer"
@@ -75,7 +80,9 @@ const Headers = () => {
           <RiShoppingBag3Line size={35} />
           <span className="text-2xl">0</span>
         </div>
-        <button className="bg-green-500 text-white rounded px-6 py-2">
+        <button
+          className="bg-green-500 text-white rounded px-6 py-2"
+          onClick={onLoginBtnHandler}>
           Login
         </button>
       </div>

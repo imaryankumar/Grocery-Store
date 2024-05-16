@@ -34,7 +34,7 @@ export const PATCH = async (request) => {
     }
     return NextResponse.json(
       { message: "Reset Password Successfully" },
-      { status: 400 }
+      { status: 200 }
     );
   } catch (error) {
     console.log(error);
