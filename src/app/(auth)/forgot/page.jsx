@@ -34,18 +34,17 @@ const Forgot = () => {
 
     try {
       const getData = await axios.post(
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/forgot`,
         userData
       );
       const cookies = getData?.data?.token;
       if (getData.status === 200) {
         toast.success(getData.data.message);
         router.push(`/reset?token=${cookies}`);
-      } else {
-        toast.error("Invalid Password");
       }
     } catch (error) {
-      console.log("Error Found", error.message);
-      toast.error(error.message);
+      console.log("Error Found", error);
+      toast.error(error.response.data.message);
     }
     SetUserDetails({
       email: "",

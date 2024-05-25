@@ -15,8 +15,8 @@ const Login = () => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
   const router = useRouter();
   const [userDetails, SetUserDetails] = useState({
-    email: "",
-    password: "",
+    email: "aryan8910kumar@gmail.com",
+    password: "123455",
   });
   const carouselImgUrl = [
     "/Images/Bannerimg1.jpg",
@@ -45,12 +45,10 @@ const Login = () => {
       if (getData.status === 200) {
         toast.success(getData.data.message);
         router.push("/");
-      } else {
-        toast.error("Invalid Password");
       }
     } catch (error) {
-      console.log("Error Found", error.message);
-      toast.error(error.message);
+      console.log("Error Found", error);
+      toast.error(error.response.data.message);
     }
     SetUserDetails({
       email: "",
