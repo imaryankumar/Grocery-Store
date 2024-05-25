@@ -39,7 +39,7 @@ const ResetPassword = () => {
 
     try {
       const getData = await axios.patch(
-        `https://grocery-store-puce.vercel.app/api/auth/reset`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/reset`,
         userData
       );
       if (getData.status === 200) {

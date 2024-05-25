@@ -34,7 +34,6 @@ const Forgot = () => {
 
     try {
       const getData = await axios.post(
-        `https://grocery-store-puce.vercel.app/api/auth/forgot`,
         userData
       );
       const cookies = getData?.data?.token;

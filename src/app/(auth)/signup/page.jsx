@@ -41,7 +41,7 @@ const Signup = () => {
 
     try {
       const getData = await axios.post(
-        `https://grocery-store-puce.vercel.app/api/auth/signup`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/signup`,
         userData
       );
       Cookies.set("userToken", getData?.data?.token);
