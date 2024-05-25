@@ -3,6 +3,7 @@ import StoreProvider from "./StoreProvider";
 import "./globals.css";
 import Headers from "@/components/Headers";
 const inter = Outfit({ subsets: ["latin"] });
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Grocery Store",
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
           <Headers />
           {children}
         </StoreProvider>
+        <Toaster />
       </body>
     </html>
   );

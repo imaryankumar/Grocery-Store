@@ -6,9 +6,14 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const router = useRouter();
   const [userDetails, SetUserDetails] = useState({
     email: "",
     password: "",
@@ -25,9 +30,29 @@ const Login = () => {
       items: 1,
     },
   };
-  const onLoginSubmitHandler = (e) => {
+  const onLoginSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log("first==>", userDetails.email, userDetails.password);
+    const userData = {
+      email: userDetails.email,
+      password: userDetails.password,
+    };
+    console.log(process.env.DOMAIN);
+    try {
+      const getData = await axios.post(
+        `https://grocery-store-puce.vercel.app/api/auth/login`,
+        userData
+      );
+      Cookies.set("userToken", getData?.data?.token);
+      if (getData.status === 200) {
+        toast.success(getData.data.message);
+        router.push("/");
+      } else {
+        toast.error("Invalid Password");
+      }
+    } catch (error) {
+      console.log("Error Found", error.message);
+      toast.error(error.message);
+    }
     SetUserDetails({
       email: "",
       password: "",
