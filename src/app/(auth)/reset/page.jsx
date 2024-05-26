@@ -1,17 +1,28 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useSearchParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const ResetPassword = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const userFindToken = searchParams.get("token");
+
+  useEffect(() => {
+    const redirectUserForgotIn = () => {
+      const authUser = Cookies.get("ForgotToken");
+      if (!authUser) {
+        router.push("/forgot");
+      }
+    };
+    redirectUserForgotIn();
+  }, [router]);
 
   const [userDetails, SetUserDetails] = useState({
     password: "",

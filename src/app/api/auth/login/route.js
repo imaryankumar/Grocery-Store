@@ -10,14 +10,14 @@ export const POST = async (request) => {
     const { email, password } = await request.json();
     if (!email || !password) {
       return NextResponse.json(
-        { message: "Fields are Required" },
+        { message: "Fields are Required", success: false },
         { status: 401 }
       );
     }
     const findUserEmail = await userAuthModal.findOne({ email });
     if (!findUserEmail) {
       return NextResponse.json(
-        { message: "User Not Registered" },
+        { message: "User Not Registered", success: false },
         { status: 400 }
       );
     }
@@ -27,7 +27,7 @@ export const POST = async (request) => {
     );
     if (!comparePassword) {
       return NextResponse.json(
-        { message: "Invalid Password" },
+        { message: "Invalid Password", success: false },
         { status: 400 }
       );
     }
@@ -37,12 +37,15 @@ export const POST = async (request) => {
       { expiresIn: 1 }
     );
     return NextResponse.json(
-      { message: "Login Successfully", token },
+      { message: "Login Successfully", success: true, token },
       { status: 200 }
     );
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ message: "Invalid" }, { status: 400 });
+    return NextResponse.json(
+      { message: "Invalid", success: false },
+      { status: 400 }
+    );
   }
 };
 
@@ -51,11 +54,14 @@ export const GET = async (request) => {
   try {
     const userFind = await userAuthModal.find({});
     return NextResponse.json(
-      { message: "All Users", userFind },
+      { message: "All Users", success: true, userFind },
       { status: 200 }
     );
   } catch (err) {
     console.log(err);
-    return NextResponse.json({ message: "Invalid" }, { status: 400 });
+    return NextResponse.json(
+      { message: "Invalid", success: false },
+      { status: 400 }
+    );
   }
 };

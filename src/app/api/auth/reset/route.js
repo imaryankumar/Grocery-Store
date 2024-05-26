@@ -9,13 +9,13 @@ export const PATCH = async (request) => {
     const { password, conpassword, token } = await request.json();
     if (!password || !conpassword || !token) {
       return NextResponse.json(
-        { message: "Fields are Required" },
+        { message: "Fields are Required", success: false },
         { status: 401 }
       );
     }
     if (password !== conpassword) {
       return NextResponse.json(
-        { message: "Paasword Not Match" },
+        { message: "Paasword Not Match", success: false },
         { status: 401 }
       );
     }
@@ -30,14 +30,20 @@ export const PATCH = async (request) => {
       { new: true }
     );
     if (!resetPassword) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: "User not found", success: false },
+        { status: 404 }
+      );
     }
     return NextResponse.json(
-      { message: "Reset Password Successfully" },
+      { message: "Reset Password Successfully", success: true },
       { status: 200 }
     );
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ message: "Invalid" }, { status: 400 });
+    return NextResponse.json(
+      { message: "Invalid", success: false },
+      { status: 400 }
+    );
   }
 };

@@ -10,7 +10,7 @@ export const POST = async (request) => {
     const { username, email, password } = await request.json();
     if (!username || !email || !password) {
       return NextResponse.json(
-        { message: "Fields are Required" },
+        { message: "Fields are Required", success: false },
         { status: 401 }
       );
     }
@@ -28,16 +28,19 @@ export const POST = async (request) => {
         { expiresIn: 1 }
       );
       return NextResponse.json(
-        { message: "Register Successfully", userCreate, token },
+        { message: "Register Successfully", success: true, userCreate, token },
         { status: 201 }
       );
     }
     return NextResponse.json(
-      { message: "User Already Registered" },
+      { message: "User Already Registered", success: false },
       { status: 400 }
     );
   } catch (err) {
     console.log(err);
-    return NextResponse.json({ message: "Invalid" }, { status: 400 });
+    return NextResponse.json(
+      { message: "Invalid", success: false },
+      { status: 400 }
+    );
   }
 };

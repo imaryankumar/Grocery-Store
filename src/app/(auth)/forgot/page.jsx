@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Forgot = () => {
   const router = useRouter();
@@ -37,10 +38,10 @@ const Forgot = () => {
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/forgot`,
         userData
       );
-      const cookies = getData?.data?.token;
       if (getData.status === 200) {
         toast.success(getData.data.message);
-        router.push(`/reset?token=${cookies}`);
+        // router.push(`/reset?token=${cookies}`);
+        Cookies.set("ForgotToken", getData?.data?.token);
       }
     } catch (error) {
       console.log("Error Found", error);
