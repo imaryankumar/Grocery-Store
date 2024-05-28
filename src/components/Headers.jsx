@@ -44,7 +44,7 @@ const Headers = () => {
             Grocery <br /> <span className="text-green-500">Store</span>
           </div>
         </Link>
-        <div className="w-auto relative" ref={categoryRef}>
+        <div className="w-auto relative " ref={categoryRef}>
           <div
             className="display-flex gap-2 bg-slate-200 py-2 px-6 rounded-full relative cursor-pointer"
             onClick={IsShowCategorySection}>
@@ -52,7 +52,7 @@ const Headers = () => {
             <span className="text-lg">Category</span>
           </div>
           {isShowCategory && (
-            <div className="absolute top-12 left-1 right-0 bg-slate-100 border h-36 w-36 rounded">
+            <div className="absolute top-12 z-10 left-1 right-0 bg-slate-100 border h-36 w-36 rounded">
               <div className="text-base flex flex-col">
                 <h3 className="font-medium text-center py-1">
                   Browse Category

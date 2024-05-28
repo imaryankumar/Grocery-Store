@@ -5,6 +5,17 @@
 .display-flex {
   @apply flex items-center justify-center;
 }
+.productcategory-size {
+  width: 14rem;
+  height: 10rem;
+  background-color: #e0fbe2;
+}
 .react-multi-carousel-dot-list {
   bottom: 25px !important;
+}
+.react-multiple-carousel__arrow--left {
+  left: calc(1.5% + 1px) !important;
+}
+.react-multiple-carousel__arrow--right {
+  right: calc(1.5% + 1px) !important;
 }

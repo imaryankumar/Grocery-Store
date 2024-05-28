@@ -57,7 +57,7 @@ const Login = () => {
   };
 
   return (
-    <div className="display-flex w-full h-[91vh] bg-slate-200">
+    <div className="display-flex w-full h-screen bg-slate-200">
       <div className="w-[50rem] h-[32rem] bg-white rounded shadow flex items-center justify-between ">
         <div className="w-full h-full flex items-center justify-center p-6">
           <div className="w-full h-full relative">
