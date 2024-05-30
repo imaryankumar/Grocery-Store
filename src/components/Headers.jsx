@@ -5,6 +5,7 @@ import { BiCategory } from "react-icons/bi";
 import { IoSearchOutline } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import ProductsItems from "../../public/json/ProductsItems.json";
 import Image from "next/image";
 
 const Headers = () => {
@@ -46,22 +47,35 @@ const Headers = () => {
         </Link>
         <div className="w-auto relative " ref={categoryRef}>
           <div
-            className="display-flex gap-2 bg-slate-200 py-2 px-6 rounded-full relative cursor-pointer"
+            className="display-flex gap-2 bg-slate-200 py-2 px-12 rounded-full relative cursor-pointer"
             onClick={IsShowCategorySection}>
             <BiCategory className="text-xl" />
-            <span className="text-lg">Category</span>
+            <span className="text-xl">Category</span>
           </div>
           {isShowCategory && (
-            <div className="absolute top-12 z-10 left-1 right-0 bg-slate-100 border h-36 w-36 rounded">
+            <div className="absolute top-12 z-10 left-2 right-0 bg-slate-100 border h-auto w-48 rounded py-3">
               <div className="text-base flex flex-col">
-                <h3 className="font-medium text-center py-1">
+                <h3 className="font-bold text-lg text-center pb-2">
                   Browse Category
                 </h3>
-                <div className="py-1 flex flex-col  items-start px-2">
-                  <p className="cursor-pointer text-base">Profile</p>
-                  <p className="cursor-pointer text-base">Biling</p>
-                  <p className="cursor-pointer text-base">Team</p>
-                  <p className="cursor-pointer text-base">Subscription</p>
+                <div className="py-1 flex flex-col gap-4  items-start px-3">
+                  {ProductsItems.map((item) => {
+                    return (
+                      <div
+                        key={item.id}
+                        className="flex items-center justify-center gap-4 cursor-pointer">
+                        <Image
+                          src={item.productImage}
+                          width={35}
+                          height={35}
+                          alt={item.productName}
+                        />
+                        <p className="hover:text-green-500 font-medium">
+                          {item.productName}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

@@ -8,7 +8,10 @@
 .productcategory-size {
   width: 14rem;
   height: 10rem;
-  background-color: #e0fbe2;
+  background-color: #d4fcd6;
+}
+.productcategory-size:hover {
+  background: rgb(181, 253, 72);
 }
 .react-multi-carousel-dot-list {
   bottom: 25px !important;

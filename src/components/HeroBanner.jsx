@@ -18,7 +18,7 @@ const HeroBanner = () => {
     },
   };
   return (
-    <div className="w-full h-full p-10">
+    <div className="w-full h-full py-10 ">
       <Carousel
         responsive={responsive}
         infinite={true}
@@ -27,7 +27,7 @@ const HeroBanner = () => {
         autoPlay={true}
         autoPlaySpeed={2500}
         renderButtonGroupOutside={true}
-        containerClass="w-full h-full">
+        containerClass="w-full h-full rounded-md">
         {carouselImgUrl?.map((item, key) => {
           return (
             <div key={key} className="w-full h-[35rem] relative">
