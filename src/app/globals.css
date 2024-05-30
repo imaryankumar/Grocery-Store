@@ -13,6 +13,16 @@
 .productcategory-size:hover {
   background: rgb(181, 253, 72);
 }
+.productdeatils-modal {
+  position: absolute;
+  background: #000;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 .react-multi-carousel-dot-list {
   bottom: 25px !important;
 }

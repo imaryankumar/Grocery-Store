@@ -18,7 +18,7 @@ const HeroBanner = () => {
     },
   };
   return (
-    <div className="w-full h-full py-10 ">
+    <div className="w-full h-[16rem] md:h-full py-6 md:py-10 ">
       <Carousel
         responsive={responsive}
         infinite={true}

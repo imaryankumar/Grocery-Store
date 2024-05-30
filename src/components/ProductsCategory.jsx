@@ -3,8 +3,10 @@ import ProductsItems from "../../public/json/ProductsItems.json";
 const ProductsCategory = () => {
   return (
     <div className="w-full h-full">
-      <h2 className="text-3xl font-bold text-[#67b12b]">Shop by Category</h2>
-      <div className="w-full h-full flex items-start justify-between pt-3 ">
+      <h2 className="text-2xl md:text-3xl text-center md:text-left font-bold text-[#67b12b]">
+        Shop by Category
+      </h2>
+      <div className="w-full h-full grid grid-col-1 sm:grid-cols-2 md:grid-cols-7 gap-10 pt-3 items-center justify-center ">
         {ProductsItems.map((items) => {
           return (
             <ProductSection
