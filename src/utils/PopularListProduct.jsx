@@ -1,7 +1,5 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
-
 const PopularListProduct = ({
   id,
   productImage,
@@ -10,9 +8,10 @@ const PopularListProduct = ({
   productBasePrice,
   productQuantity,
   productCategory,
+  productDescr,
+  setIsProductDetails,
+  setIsModalOpen,
 }) => {
-  const [isOpenProductModal, setIsOpenProductModal] = useState(false);
-  const [isProductDetails, setIsProductDetails] = useState("");
   const allProductDetails = {
     id,
     productImage,
@@ -21,10 +20,11 @@ const PopularListProduct = ({
     productBasePrice,
     productQuantity,
     productCategory,
+    productDescr,
   };
   const showProductDetailsHandler = (id) => {
     setIsProductDetails(id);
-    setIsOpenProductModal(true);
+    setIsModalOpen(true);
   };
 
   return (

@@ -2,36 +2,43 @@
   {
     "id": 1,
     "productName": "Vegetables",
+    "productSlug": "vegetables",
     "productImage": "/Images/ProductIcons/vegetables.png"
   },
   {
     "id": 2,
     "productName": "Fruits",
+    "productSlug": "fruits",
     "productImage": "/Images/ProductIcons/healthy-food.png"
   },
   {
     "id": 3,
     "productName": "Milk & Juice",
+    "productSlug": "milk&juice",
     "productImage": "/Images/ProductIcons/drink.png"
   },
   {
     "id": 4,
     "productName": "Bakery",
+    "productSlug": "bakery",
     "productImage": "/Images/ProductIcons/Bakery.png"
   },
   {
     "id": 5,
     "productName": "Personal Care",
+    "productSlug": "personalcare",
     "productImage": "/Images/ProductIcons/cream.png"
   },
   {
     "id": 6,
     "productName": "Grains",
+    "productSlug": "grains",
     "productImage": "/Images/ProductIcons/bread.png"
   },
   {
     "id": 7,
     "productName": "Chicken & Egg",
+    "productSlug": "chicken&egg",
     "productImage": "/Images/ProductIcons/fried-chicken.png"
   }
 ]

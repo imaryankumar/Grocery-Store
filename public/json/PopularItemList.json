@@ -6,7 +6,9 @@
     "productReguPrice": "$3",
     "productBasePrice": "$4",
     "productQuantity": "1pc",
-    "productCategory": "Vegetables"
+    "productCategory": "Vegetables",
+    "productRating": "4.5",
+    "productDescr": "Vegetables are an essential part of a healthy diet, offering a myriad of benefits and flavors. From leafy greens to root vegetables, they come in a variety of shapes, sizes, and colors, each providing unique nutrients and culinary possibilities. "
   },
   {
     "id": 2,
@@ -15,7 +17,9 @@
     "productReguPrice": "$5",
     "productBasePrice": "",
     "productQuantity": "6pcs",
-    "productCategory": "Fruits"
+    "productCategory": "Fruits",
+    "productRating": "3.8",
+    "productDescr": "Vegetables are an essential part of a healthy diet, offering a myriad of benefits and flavors. From leafy greens to root vegetables, they come in a variety of shapes, sizes, and colors, each providing unique nutrients and culinary possibilities. "
   },
   {
     "id": 3,
@@ -24,7 +28,9 @@
     "productReguPrice": "$4.99",
     "productBasePrice": "$5.99",
     "productQuantity": "500gm",
-    "productCategory": "Vegetables"
+    "productCategory": "Vegetables",
+    "productRating": "2.3",
+    "productDescr": "Vegetables are an essential part of a healthy diet, offering a myriad of benefits and flavors. From leafy greens to root vegetables, they come in a variety of shapes, sizes, and colors, each providing unique nutrients and culinary possibilities. "
   },
   {
     "id": 4,
@@ -33,7 +39,9 @@
     "productReguPrice": "$3.29",
     "productBasePrice": "$5.99",
     "productQuantity": "500gm",
-    "productCategory": "Fruits"
+    "productCategory": "Fruits",
+    "productRating": "4.9",
+    "productDescr": "Vegetables are an essential part of a healthy diet, offering a myriad of benefits and flavors. From leafy greens to root vegetables, they come in a variety of shapes, sizes, and colors, each providing unique nutrients and culinary possibilities. "
   },
   {
     "id": 5,
@@ -42,7 +50,9 @@
     "productReguPrice": "$6.99",
     "productBasePrice": "",
     "productQuantity": "500ml",
-    "productCategory": "Milk & Juice"
+    "productCategory": "Milk & Juice",
+    "productRating": "5",
+    "productDescr": "Vegetables are an essential part of a healthy diet, offering a myriad of benefits and flavors. From leafy greens to root vegetables, they come in a variety of shapes, sizes, and colors, each providing unique nutrients and culinary possibilities. "
   },
   {
     "id": 6,
@@ -51,7 +61,9 @@
     "productReguPrice": "$0.98",
     "productBasePrice": "",
     "productQuantity": "100gm",
-    "productCategory": "Vegetables"
+    "productCategory": "Vegetables",
+    "productRating": "4.7",
+    "productDescr": "Vegetables are an essential part of a healthy diet, offering a myriad of benefits and flavors. From leafy greens to root vegetables, they come in a variety of shapes, sizes, and colors, each providing unique nutrients and culinary possibilities. "
   },
   {
     "id": 7,
@@ -60,7 +72,9 @@
     "productReguPrice": "$8.99",
     "productBasePrice": "",
     "productQuantity": "1kg",
-    "productCategory": "Fruits"
+    "productCategory": "Fruits",
+    "productRating": "3.7",
+    "productDescr": "Vegetables are an essential part of a healthy diet, offering a myriad of benefits and flavors. From leafy greens to root vegetables, they come in a variety of shapes, sizes, and colors, each providing unique nutrients and culinary possibilities. "
   },
   {
     "id": 8,
@@ -69,6 +83,8 @@
     "productReguPrice": "$2.98",
     "productBasePrice": "",
     "productQuantity": "1pc",
-    "productCategory": "Fruits"
+    "productCategory": "Fruits",
+    "productRating": "4.6",
+    "productDescr": "Vegetables are an essential part of a healthy diet, offering a myriad of benefits and flavors. From leafy greens to root vegetables, they come in a variety of shapes, sizes, and colors, each providing unique nutrients and culinary possibilities. "
   }
 ]

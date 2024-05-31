@@ -13,6 +13,7 @@ const ProductsCategory = () => {
               key={items.id}
               productName={items.productName}
               productImage={items.productImage}
+              productSlug={items.productSlug}
             />
           );
         })}
