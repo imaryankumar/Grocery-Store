@@ -38,8 +38,11 @@ const PopularListProduct = ({
           <span>({productQuantity})</span>
         </h3>
         <h4 className="flex gap-3">
-          <strong>{productReguPrice}</strong>
-          <span>{productBasePrice}</span>
+          <strong>${productReguPrice}</strong>
+          <span>
+            {productBasePrice && <span>$</span>}
+            {productBasePrice}
+          </span>
         </h4>
         <button
           className="border border-gray-300 px-6 py-2 rounded text-green-500 font-medium text-lg"

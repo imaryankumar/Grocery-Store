@@ -5,10 +5,28 @@ import PopularListProduct from "@/utils/PopularListProduct";
 import { RxCross2 } from "react-icons/rx";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import Image from "next/image";
+import ProductAddBtn from "@/utils/ProductAddBtn";
 const PopularProducts = () => {
   const [isProductDetails, setIsProductDetails] = useState("");
   const [isOpenModal, setIsModalOpen] = useState(false);
   const modalRef = useRef();
+
+  useEffect(() => {
+    if (isOpenModal) {
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.paddingRight = "";
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.paddingRight = "";
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpenModal]);
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -73,17 +91,17 @@ const PopularProducts = () => {
                   </div>
                   <p>{isProductDetails.productDescr}</p>
                   <div className="flex gap-5">
-                    <h3>{isProductDetails.productBasePrice}</h3>
+                    {isProductDetails.productBasePrice && (
+                      <h3>${isProductDetails.productBasePrice}</h3>
+                    )}
                     <span>
-                      <strong>{isProductDetails.productReguPrice}</strong>
+                      <strong>${isProductDetails.productReguPrice}</strong>
                     </span>
                   </div>
                   <h3>Quantity ({isProductDetails.productQuantity})</h3>
-                  <div className="border-2 rounded w-[10rem] h-[3rem] flex items-center justify-between px-3">
-                    <span>-</span>
-                    <span>1</span>
-                    <span>+</span>
-                  </div>
+                  <ProductAddBtn
+                    productPrice={isProductDetails.productReguPrice}
+                  />
                   <button className="bg-green-500 px-4 py-2 text-white display-flex gap-4 rounded text-xl ">
                     <span className="text-2xl">
                       <RiShoppingBag3Line />

@@ -18,6 +18,10 @@ const Headers = () => {
   const onLoginBtnHandler = () => {
     router.push("/login");
   };
+  const onProductCategoryHandler = (id) => {
+    // router.push(`shop/${id}`);
+    console.log("first", `shop/${id}`);
+  };
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (categoryRef.current && !categoryRef.current.contains(event.target)) {
@@ -29,6 +33,7 @@ const Headers = () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [categoryRef]);
+
   return (
     <nav className="w-full flex items-center justify-between px-10 bg-white shadow h-20 text-xl">
       <div className="text-3xl font-medium display-flex gap-8">
@@ -63,7 +68,10 @@ const Headers = () => {
                     return (
                       <div
                         key={item.id}
-                        className="flex items-center justify-center gap-4 cursor-pointer">
+                        className="flex items-center justify-center gap-4 cursor-pointer"
+                        onClick={() =>
+                          onProductCategoryHandler(item.productSlug)
+                        }>
                         <Image
                           src={item.productImage}
                           width={35}

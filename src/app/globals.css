@@ -23,6 +23,18 @@
   right: 0;
   bottom: 0;
 }
+.productadd-btn {
+  border: 2px solid silver;
+  width: 7rem;
+  height: 35px;
+  border-radius: 5px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  cursor: pointer;
+}
 .react-multi-carousel-dot-list {
   bottom: 25px !important;
 }
