@@ -2,12 +2,11 @@ import mongoose from "mongoose";
 
 const ProductSchema = new mongoose.Schema(
   {
-    _id: {
-      type: Schema.Types.ObjectId,
-      auto: true,
-      unique: true,
+    prodImgurl: {
+      type: String,
+      required: true,
     },
-    productImage: {
+    productName: {
       type: String,
       required: true,
     },
@@ -41,7 +40,7 @@ const ProductSchema = new mongoose.Schema(
   }
 );
 
-const productsModal =
+const ProductsModel =
   mongoose.models?.Products || mongoose.model("Products", ProductSchema);
 
-export default productsModal;
+export default ProductsModel;
