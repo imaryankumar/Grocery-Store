@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const ProductAddBtn = ({ productPrice }) => {
-  const [productCount, setProductCount] = useState(1);
+const ProductAddBtn = ({ productPrice, productCount, setProductCount }) => {
   return (
     <div className="w-full flex items-center justify-start gap-4 select-none">
       <div className="productadd-btn">

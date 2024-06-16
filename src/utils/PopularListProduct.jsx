@@ -11,6 +11,9 @@ const PopularListProduct = ({
   productDescr,
   setIsProductDetails,
   setIsModalOpen,
+  setProductCount,
+  isProductDetails,
+  productCount,
 }) => {
   const allProductDetails = {
     id,
@@ -22,15 +25,27 @@ const PopularListProduct = ({
     productCategory,
     productDescr,
   };
-  const showProductDetailsHandler = (id) => {
-    setIsProductDetails(id);
+  // console.log("allProducts", allProductDetails);
+  const showProductDetailsHandler = (details) => {
+    setIsProductDetails(details);
     setIsModalOpen(true);
+    if (details.id === isProductDetails.id) {
+      setProductCount(productCount);
+    } else {
+      setProductCount(1);
+    }
   };
 
   return (
     <div className=" relative w-full h-full border flex items-center justify-center gap-4 rounded shadow cursor-pointer ">
       <div className=" relative py-10 w-full h-full flex flex-col gap-4 items-center justify-center ">
-        <Image src={productImage} width={200} height={200} alt={productName} />
+        <Image
+          src={productImage}
+          width={200}
+          height={200}
+          alt={productName}
+          objectFit="cover"
+        />
         <h3 className="text-xl flex gap-2">
           <span>
             <strong>{productName}</strong>

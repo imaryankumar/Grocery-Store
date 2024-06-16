@@ -35,6 +35,14 @@
   padding: 0 1rem;
   cursor: pointer;
 }
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+.light-mode {
+  background-color: white;
+  color: black;
+}
 .react-multi-carousel-dot-list {
   bottom: 25px !important;
 }

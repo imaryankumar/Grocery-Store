@@ -4,6 +4,7 @@ import "./globals.css";
 import Headers from "@/components/Headers";
 const inter = Outfit({ subsets: ["latin"] });
 import { Toaster } from "react-hot-toast";
+import DarkModeProvider from "@/config/DarkModeProvider";
 
 export const metadata = {
   title: "Grocery Store",
@@ -15,8 +16,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
-          <Headers />
-          {children}
+          <DarkModeProvider>
+            <Headers />
+            {children}
+          </DarkModeProvider>
         </StoreProvider>
         <Toaster />
       </body>

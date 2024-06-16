@@ -10,9 +10,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { ThreeDots } from "react-loader-spinner";
 
 const Login = () => {
   const [isPasswordShow, setIsPasswordShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [userDetails, SetUserDetails] = useState({
     email: "aryan8910kumar@gmail.com",
@@ -37,6 +39,7 @@ const Login = () => {
       password: userDetails.password,
     };
     try {
+      setIsLoading(true);
       const getData = await axios.post(
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/login`,
         userData
@@ -44,11 +47,13 @@ const Login = () => {
       Cookies.set("userToken", getData?.data?.token);
       if (getData.status === 200) {
         toast.success(getData.data.message);
+        setIsLoading(false);
         router.push("/");
       }
     } catch (error) {
       console.log("Error Found", error);
       toast.error(error.response.data.message);
+      setIsLoading(false);
     }
     SetUserDetails({
       email: "",
@@ -126,8 +131,14 @@ const Login = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full h-full py-2 bg-blue-500 hover:bg-blue-600 rounded-md font-medium text-white">
-                  Sign in
+                  className="w-full h-full py-2 bg-blue-500 hover:bg-blue-600 rounded-md font-medium text-white text-center">
+                  {isLoading ? (
+                    <div className="text-center w-full h-full">
+                      <ThreeDots width={25} height={25} />
+                    </div>
+                  ) : (
+                    "Sign in"
+                  )}
                 </button>
                 <div className="flex items-center">
                   <div className="w-full border-b border-gray-300"></div>

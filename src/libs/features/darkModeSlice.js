@@ -1,16 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  // mode: JSON.parse(localStorage.getItem("darkMode")) || false,
-  mode: false,
+const getInitialDarkMode = () => {
+  if (typeof window !== "undefined" && window.localStorage) {
+    return JSON.parse(localStorage.getItem("darkMode")) || false;
+  }
+  return false;
 };
+
+const initialState = {
+  mode: getInitialDarkMode(),
+};
+
 export const darkModeSlice = createSlice({
   name: "darkMode",
   initialState,
   reducers: {
     toggleDarkMode: (state) => {
       state.mode = !state.mode;
-      // localStorage.setItem("darkMode", JSON.stringify(state.mode));
+      if (typeof window !== "undefined" && window.localStorage) {
+        localStorage.setItem("darkMode", JSON.stringify(state.mode));
+      }
     },
   },
 });

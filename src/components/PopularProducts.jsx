@@ -6,10 +6,29 @@ import { RxCross2 } from "react-icons/rx";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import Image from "next/image";
 import ProductAddBtn from "@/utils/ProductAddBtn";
+import { useDispatch } from "react-redux";
+import { addItems } from "@/libs/features/cartSlice";
+import axios from "axios";
 const PopularProducts = () => {
+  const dispatch = useDispatch();
+  const [popularProductList, setPopularProductList] = useState([]);
   const [isProductDetails, setIsProductDetails] = useState("");
   const [isOpenModal, setIsModalOpen] = useState(false);
+  const [productCount, setProductCount] = useState(1);
   const modalRef = useRef();
+  // console.log("popularProductList", popularProductList);
+
+  const addTocartHandler = () => {
+    setIsModalOpen(false);
+    const newItem = {
+      name: isProductDetails.productName,
+      products: productCount,
+      prodImg: isProductDetails.productImage,
+      prodQuality: isProductDetails.productQuantity,
+      prodPrice: isProductDetails.productReguPrice,
+    };
+    dispatch(addItems(newItem));
+  };
 
   useEffect(() => {
     if (isOpenModal) {
@@ -26,6 +45,23 @@ const PopularProducts = () => {
       document.body.style.overflow = "auto";
     };
   }, [isOpenModal]);
+  useEffect(() => {
+    fetchData();
+    return () => {
+      setPopularProductList();
+    };
+  }, []);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/products/all`
+      );
+      setPopularProductList(response?.data?.allProductsFind);
+      // console.log("productDetail", response?.data?.allProductsFind);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -43,20 +79,23 @@ const PopularProducts = () => {
         Our Popular Products
       </h3>
       <div className="pt-3 w-full h-full grid grid-cols-1 sm:grid-col-2 md:grid-cols-4 gap-10">
-        {PopularItemList.map((item) => {
+        {popularProductList?.slice(0, 8).map((item) => {
           return (
             <PopularListProduct
-              key={item.id}
-              id={item.id}
-              productImage={item.productImage}
+              key={item._id}
+              id={item._id}
+              productImage={item.prodImgurl}
               productName={item.productName}
-              productReguPrice={item.productReguPrice}
-              productBasePrice={item.productBasePrice}
+              productReguPrice={item.regularPrice}
+              productBasePrice={item.basePrice}
               productQuantity={item.productQuantity}
               productCategory={item.productCategory}
-              productDescr={item.productDescr}
+              productDescr={item.productDescription}
+              isProductDetails={isProductDetails}
               setIsProductDetails={setIsProductDetails}
               setIsModalOpen={setIsModalOpen}
+              setProductCount={setProductCount}
+              productCount={productCount}
             />
           );
         })}
@@ -68,7 +107,7 @@ const PopularProducts = () => {
             className="w-[50%] h-[50%] bg-white shadow rounded-lg flex items-center justify-center">
             <div className=" relative w-full h-full p-10">
               <h3
-                className="absolute top-3 right-3 text-xl cursor-pointer"
+                className="absolute top-3 right-3 text-xl cursor-pointer border hover:bg-black hover:text-white rounded-full p-1 "
                 onClick={() => setIsModalOpen(false)}>
                 <RxCross2 />
               </h3>
@@ -101,12 +140,14 @@ const PopularProducts = () => {
                   <h3>Quantity ({isProductDetails.productQuantity})</h3>
                   <ProductAddBtn
                     productPrice={isProductDetails.productReguPrice}
+                    productCount={productCount}
+                    setProductCount={setProductCount}
                   />
                   <button className="bg-green-500 px-4 py-2 text-white display-flex gap-4 rounded text-xl ">
                     <span className="text-2xl">
                       <RiShoppingBag3Line />
                     </span>
-                    <span>Add To Cart</span>
+                    <span onClick={addTocartHandler}>Add To Cart</span>
                   </button>
                   <h3>
                     <span>Category: </span>
