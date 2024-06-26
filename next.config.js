@@ -3,12 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["https://cdn.grofers.com/"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "cdn.grofers.com",
         pathname: "**",
+        port: "",
       },
     ],
   },
