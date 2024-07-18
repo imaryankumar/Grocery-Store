@@ -14,15 +14,15 @@ const ResetPassword = () => {
   const searchParams = useSearchParams();
   const userFindToken = searchParams.get("token");
 
-  useEffect(() => {
-    const redirectUserForgotIn = () => {
-      const authUser = Cookies.get("ForgotToken");
-      if (!authUser) {
-        router.push("/forgot");
-      }
-    };
-    redirectUserForgotIn();
-  }, [router]);
+  // useEffect(() => {
+  //   const redirectUserForgotIn = () => {
+  //     const authUser = Cookies.get("ForgotToken");
+  //     if (!authUser) {
+  //       router.push("/forgot");
+  //     }
+  //   };
+  //   redirectUserForgotIn();
+  // }, [router]);
 
   const [userDetails, SetUserDetails] = useState({
     password: "",

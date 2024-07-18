@@ -16,10 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <StoreProvider>
-          <DarkModeProvider>
-            <Headers />
-            {children}
-          </DarkModeProvider>
+          <DarkModeProvider>{children}</DarkModeProvider>
         </StoreProvider>
         <Toaster />
       </body>

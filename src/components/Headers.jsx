@@ -69,7 +69,7 @@ const Headers = () => {
   return (
     <>
       <nav
-        className={`w-full flex items-center justify-between px-10 shadow h-20 text-xl`}>
+        className={`w-full flex items-center justify-between px-10 shadow h-20 text-xl sticky top-0 z-50 bg-slate-50`}>
         <div className="text-3xl font-medium display-flex gap-8">
           <Link href={"/"} className="display-flex gap-1 text-yellow-600  ">
             <span>
