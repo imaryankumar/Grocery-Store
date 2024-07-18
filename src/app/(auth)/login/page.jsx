@@ -44,11 +44,13 @@ const Login = () => {
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/auth/login`,
         userData
       );
-      Cookies.set("userToken", getData?.data?.token);
       if (getData.status === 200) {
         toast.success(getData.data.message);
         setIsLoading(false);
+        Cookies.set("userToken", getData?.data?.token);
         router.push("/");
+      } else {
+        Cookies.set("userToken", null);
       }
     } catch (error) {
       console.log("Error Found", error);

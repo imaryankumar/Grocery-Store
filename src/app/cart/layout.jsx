@@ -1,6 +1,6 @@
 import Headers from "@/components/Headers";
 
-export default function ShopLayout({ children }) {
+export default function CartLayout({ children }) {
   return (
     <>
       <Headers />
