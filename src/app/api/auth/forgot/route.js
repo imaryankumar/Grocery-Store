@@ -59,8 +59,8 @@ export const POST = async (request) => {
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { message: "Invalid", success: false },
-      { status: 400 }
+      { message: "Internal Server Error", success: false },
+      { status: 500 }
     );
   }
 };

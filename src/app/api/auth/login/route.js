@@ -60,8 +60,8 @@ export const GET = async (request) => {
   } catch (err) {
     console.log(err);
     return NextResponse.json(
-      { message: "Invalid", success: false },
-      { status: 400 }
+      { message: "Internal Server Error", success: false },
+      { status: 500 }
     );
   }
 };
