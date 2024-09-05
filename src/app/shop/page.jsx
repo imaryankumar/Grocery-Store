@@ -17,6 +17,44 @@ const Shop = () => {
   const [pageNum, setPageNum] = useState(1);
   const sortRef = useRef();
 
+  const filterProducts = [
+    {
+      id: 1,
+      productName: "Vegetables",
+      productId: "vegetables",
+    },
+    {
+      id: 2,
+      productName: "Fruits",
+      productId: "fruits",
+    },
+    {
+      id: 3,
+      productName: "Milk & Juice",
+      productId: "milk&juice",
+    },
+    {
+      id: 4,
+      productName: "Bakery",
+      productId: "bakery",
+    },
+    {
+      id: 5,
+      productName: "Personal Care",
+      productId: "personalcare",
+    },
+    {
+      id: 6,
+      productName: "Grains",
+      productId: "grains",
+    },
+    {
+      id: 7,
+      productName: "Chicken & Egg",
+      productId: "chicken&egg",
+    },
+  ];
+
   const fetchData = useCallback(async () => {
     try {
       const response = await axios.get(
@@ -69,12 +107,48 @@ const Shop = () => {
     };
   }, [loadMoreProducts]);
 
+  const filterFetchData = async (category) => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/products/${category}`
+      );
+      if (response.data.success) {
+        setProductDetail(response.data.categoryProductsFind);
+      } else {
+        console.log("Error Found!!");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const onfilterProductsHandler = (item) => {
+    filterFetchData(item);
+  };
+
   return (
-    <div className="w-full h-full flex items-start justify-between px-10 py-5">
-      <div className="w-[15%] h-full">
+    <div className="w-full h-full flex items-start justify-between px-5 lg:px-8 xl:px-10 py-5">
+      <div className="w-[15%] h-full sticky top-10">
         <h2 className="text-xl font-semibold">FILTERS</h2>
         <div className="mt-5">
           <h2>CATEGORIES</h2>
+          <div className="w-full h-full py-5 flex flex-col gap-3 items-start justify-center select-none">
+            {filterProducts.map((item) => {
+              return (
+                <div key={item.productId} className="flex gap-4">
+                  <input
+                    type="checkbox"
+                    id={item.productId}
+                    className="cursor-pointer"
+                    onClick={() => onfilterProductsHandler(item.productId)}
+                  />
+                  <label htmlFor={item.productId} className="cursor-pointer">
+                    {item.productName}
+                  </label>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
       <div className="w-full h-full">
@@ -104,7 +178,7 @@ const Shop = () => {
           </div>
         </div>
         <div className="relative mt-5 w-full h-full">
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {productDetail.map((item) => (
               <PopularListProduct
                 key={item._id}

@@ -4,6 +4,7 @@ import PopularListProduct from "@/utils/PopularListProduct";
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+import { BallTriangle } from "react-loader-spinner";
 const Category = () => {
   const { category } = useParams();
   const sortProductsName = [
@@ -15,6 +16,7 @@ const Category = () => {
   ];
   const [productDetail, setProductDetail] = useState([]);
   const [isOutSideClick, setIsOutSideClick] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const sortRef = useRef();
   useEffect(() => {
     fetchData();
@@ -23,14 +25,17 @@ const Category = () => {
     };
   }, []);
   const fetchData = async () => {
+    setIsLoading(false);
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/products/${category}`
       );
       setProductDetail(response?.data?.categoryProductsFind);
+      setIsLoading(true);
       // console.log("productDetail", response?.data?.categoryProductsFind);
     } catch (error) {
       console.error("Error fetching data:", error);
+      setIsLoading(true);
     }
   };
   useEffect(() => {
@@ -46,7 +51,7 @@ const Category = () => {
   }, [sortRef]);
 
   return (
-    <div className="w-full h-full flex items-start justify-between px-10 py-5">
+    <div className="w-full h-full flex items-start justify-between px-5 lg:px-8 xl:px-10 py-5">
       <div className="w-full h-full ">
         <div className="w-full h-auto flex items-center justify-between">
           <h2 className="text-3xl font-semibold capitalize">{category}</h2>
@@ -75,25 +80,31 @@ const Category = () => {
             )}
           </div>
         </div>
-        <div className="relative mt-5 w-full h-full">
-          <div className="grid grid-cols-4 gap-8">
-            {productDetail?.map((item) => {
-              return (
-                <PopularListProduct
-                  key={item._id}
-                  id={item._id}
-                  productImage={item.prodImgurl}
-                  productName={item.productName}
-                  productReguPrice={item.regularPrice}
-                  productBasePrice={item.basePrice}
-                  productQuantity={item.productQuantity}
-                  productCategory={item.productCategory}
-                  productDescr={item.productDescription}
-                />
-              );
-            })}
+        {isLoading ? (
+          <div className="relative mt-5 w-full h-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              {productDetail?.map((item) => {
+                return (
+                  <PopularListProduct
+                    key={item._id}
+                    id={item._id}
+                    productImage={item.prodImgurl}
+                    productName={item.productName}
+                    productReguPrice={item.regularPrice}
+                    productBasePrice={item.basePrice}
+                    productQuantity={item.productQuantity}
+                    productCategory={item.productCategory}
+                    productDescr={item.productDescription}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="w-full h-full mt-80 flex items-center justify-center">
+            <BallTriangle />
+          </div>
+        )}
       </div>
     </div>
   );

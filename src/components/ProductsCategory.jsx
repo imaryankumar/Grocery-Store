@@ -6,7 +6,7 @@ const ProductsCategory = () => {
       <h2 className="text-2xl md:text-3xl text-center md:text-left font-bold text-[#67b12b]">
         Shop by Category
       </h2>
-      <div className="w-full h-full grid grid-col-1 sm:grid-cols-2 md:grid-cols-7 gap-10 pt-3 items-center justify-center ">
+      <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-5 xl:gap-10 pt-3 items-center justify-center place-items-center ">
         {ProductsItems.map((items) => {
           return (
             <ProductSection

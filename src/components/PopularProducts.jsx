@@ -9,8 +9,10 @@ import ProductAddBtn from "@/utils/ProductAddBtn";
 import { useDispatch } from "react-redux";
 import { addItems } from "@/libs/features/cartSlice";
 import axios from "axios";
+import { RotatingLines } from "react-loader-spinner";
 const PopularProducts = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const [popularProductList, setPopularProductList] = useState([]);
   const [isProductDetails, setIsProductDetails] = useState("");
   const [isOpenModal, setIsModalOpen] = useState(false);
@@ -52,14 +54,17 @@ const PopularProducts = () => {
     };
   }, []);
   const fetchData = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/products/all`
       );
       setPopularProductList(response?.data?.allProductsFind);
+      setIsLoading(false);
       // console.log("productDetail", response?.data?.allProductsFind);
     } catch (error) {
       console.error("Error fetching data:", error);
+      setIsLoading(false);
     }
   };
 
@@ -78,28 +83,35 @@ const PopularProducts = () => {
       <h3 className="text-2xl md:text-3xl font-bold text-[#67b12b]">
         Our Popular Products
       </h3>
-      <div className="pt-3 w-full h-full grid grid-cols-1 sm:grid-col-2 md:grid-cols-4 gap-10">
-        {popularProductList?.slice(0, 8).map((item) => {
-          return (
-            <PopularListProduct
-              key={item._id}
-              id={item._id}
-              productImage={item.prodImgurl}
-              productName={item.productName}
-              productReguPrice={item.regularPrice}
-              productBasePrice={item.basePrice}
-              productQuantity={item.productQuantity}
-              productCategory={item.productCategory}
-              productDescr={item.productDescription}
-              isProductDetails={isProductDetails}
-              setIsProductDetails={setIsProductDetails}
-              setIsModalOpen={setIsModalOpen}
-              setProductCount={setProductCount}
-              productCount={productCount}
-            />
-          );
-        })}
-      </div>
+
+      {isLoading ? (
+        <div className="h-screen w-full flex items-center justify-center">
+          <RotatingLines />
+        </div>
+      ) : (
+        <div className="pt-3 w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+          {popularProductList?.slice(0, 8).map((item) => {
+            return (
+              <PopularListProduct
+                key={item._id}
+                id={item._id}
+                productImage={item.prodImgurl}
+                productName={item.productName}
+                productReguPrice={item.regularPrice}
+                productBasePrice={item.basePrice}
+                productQuantity={item.productQuantity}
+                productCategory={item.productCategory}
+                productDescr={item.productDescription}
+                isProductDetails={isProductDetails}
+                setIsProductDetails={setIsProductDetails}
+                setIsModalOpen={setIsModalOpen}
+                setProductCount={setProductCount}
+                productCount={productCount}
+              />
+            );
+          })}
+        </div>
+      )}
       {isOpenModal && (
         <div className="fixed inset-0 bg-[#00000080] flex items-center justify-center">
           <div
