@@ -44,11 +44,10 @@ const HeroBanner = () => {
               <div key={key} className="w-full h-[35rem] relative">
                 <Image
                   src={item}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
                   priority
                   alt={`Banner image ${key + 1}`}
-                  className="rounded-md"
+                  className="rounded-md object-cover"
                 />
               </div>
             ))}

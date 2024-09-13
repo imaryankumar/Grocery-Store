@@ -124,6 +124,29 @@ const Shop = () => {
 
   const onfilterProductsHandler = (item) => {
     filterFetchData(item);
+    console.log("first", item);
+  };
+
+  const onSortedProductHandler = (item) => {
+    switch (item) {
+      case "Recommended":
+        console.log("1");
+        break;
+      case "Popularity":
+        console.log("2");
+        break;
+      case "Better Discount":
+        console.log("3");
+        break;
+      case "Price: Low to High":
+        console.log("4");
+        break;
+      case "Price: High to Low":
+        console.log("5");
+        break;
+      default:
+        console.log("Item not recognized");
+    }
   };
 
   return (
@@ -169,7 +192,8 @@ const Shop = () => {
                 {sortProductsName.map((item) => (
                   <span
                     className="hover:bg-slate-100 h-full w-full px-3 py-1"
-                    key={item}>
+                    key={item}
+                    onClick={() => onSortedProductHandler(item)}>
                     {item}
                   </span>
                 ))}
@@ -179,9 +203,9 @@ const Shop = () => {
         </div>
         <div className="relative mt-5 w-full h-full">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {productDetail.map((item) => (
+            {productDetail.map((item, index) => (
               <PopularListProduct
-                key={item._id}
+                key={index}
                 id={item._id}
                 productImage={item.prodImgurl}
                 productName={item.productName}

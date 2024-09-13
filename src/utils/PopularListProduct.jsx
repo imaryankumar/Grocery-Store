@@ -44,7 +44,8 @@ const PopularListProduct = ({
           width={200}
           height={200}
           alt={productName}
-          objectFit="cover"
+          className="object-cover"
+          priority
         />
         <h3 className="text-xl flex gap-2">
           <span>

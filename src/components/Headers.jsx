@@ -12,11 +12,13 @@ import { RxCross2 } from "react-icons/rx";
 import CartProductList from "@/utils/CartProductList";
 import { MdOutlineToggleOff, MdOutlineToggleOn } from "react-icons/md";
 import { toggleDarkMode } from "@/libs/features/darkModeSlice";
+import { LoaderIcon } from "react-hot-toast";
 
 const Headers = () => {
   const [isShowCategory, setIsShowCategory] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const categoryRef = useRef();
   const slidebarRef = useRef();
   const dispatch = useDispatch();
@@ -28,7 +30,11 @@ const Headers = () => {
     setIsShowCategory((prev) => !prev);
   };
   const onLoginBtnHandler = () => {
-    router.push("/login");
+    setIsLoading(true);
+    setTimeout(() => {
+      router.push("/login");
+      setIsLoading(false);
+    }, 1000);
   };
   const onProductCategoryHandler = (id) => {
     router.push(`/shop/${id}`);
@@ -65,6 +71,9 @@ const Headers = () => {
   const onDarkModeHandler = () => {
     dispatch(toggleDarkMode());
     setIsDarkMode((prev) => !prev);
+  };
+  const onMyCartHandler = () => {
+    router.push("/cart");
   };
   return (
     <>
@@ -149,7 +158,13 @@ const Headers = () => {
           <button
             className="bg-green-500 text-white rounded px-6 py-2"
             onClick={onLoginBtnHandler}>
-            Login
+            {isLoading ? (
+              <span className="w-full h-full flex items-center justify-center py-2 px-[19px]">
+                <LoaderIcon />
+              </span>
+            ) : (
+              "Login"
+            )}
           </button>
         </div>
       </nav>
@@ -164,7 +179,9 @@ const Headers = () => {
             onClick={() => setIsSidebarOpen(false)}>
             <RxCross2 />
           </span>
-          <button className="bg-green-500 w-full my-2 py-2 rounded-md text-white font-semibold">
+          <button
+            className="bg-green-500 w-full my-2 py-2 rounded-md text-white font-semibold"
+            onClick={onMyCartHandler}>
             My Cart
           </button>
           <div className="w-full h-full flex flex-col items-center justify-start gap-2 py-4 ">
