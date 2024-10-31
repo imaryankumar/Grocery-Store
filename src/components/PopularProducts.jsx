@@ -6,13 +6,17 @@ import { RxCross2 } from "react-icons/rx";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import Image from "next/image";
 import ProductAddBtn from "@/utils/ProductAddBtn";
-import { useDispatch } from "react-redux";
-import { addItems } from "@/libs/features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+// import {
+//   addItems,
+//   productCardDetail,
+// } from "@/libs/features/getProductDetails/cartSlice";
 import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
+import { productCardDetail } from "@/libs/features/getProductDetails/cartSlice";
 const PopularProducts = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [popularProductList, setPopularProductList] = useState([]);
   const [isProductDetails, setIsProductDetails] = useState("");
   const [isOpenModal, setIsModalOpen] = useState(false);
@@ -31,6 +35,10 @@ const PopularProducts = () => {
     };
     dispatch(addItems(newItem));
   };
+
+  const { productDetails, isError, isLoading } = useSelector(
+    (state) => state.cart
+  );
 
   useEffect(() => {
     if (isOpenModal) {
@@ -54,17 +62,17 @@ const PopularProducts = () => {
     };
   }, []);
   const fetchData = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/products/all`
       );
       setPopularProductList(response?.data?.allProductsFind);
-      setIsLoading(false);
+      // setIsLoading(false);
       // console.log("productDetail", response?.data?.allProductsFind);
     } catch (error) {
       console.error("Error fetching data:", error);
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
 
@@ -78,6 +86,20 @@ const PopularProducts = () => {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [modalRef]);
 
+  useEffect(() => {
+    dispatch(productCardDetail());
+  }, []);
+
+  console.log("productDetails", productDetails.allProductsFind);
+  console.table([isError, isLoading]);
+
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+  if (isError) {
+    return <span>Error Found..</span>;
+  }
+
   return (
     <div className=" relative w-full h-full py-10">
       <h3 className="text-2xl md:text-3xl font-bold text-[#67b12b]">
@@ -90,7 +112,7 @@ const PopularProducts = () => {
         </div>
       ) : (
         <div className="pt-3 w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-          {popularProductList?.slice(0, 8).map((item) => {
+          {productDetails?.allProductsFind?.slice(0, 8).map((item) => {
             return (
               <PopularListProduct
                 key={item._id}
@@ -112,7 +134,7 @@ const PopularProducts = () => {
           })}
         </div>
       )}
-      {isOpenModal && (
+      {/* {isOpenModal && (
         <div className="fixed inset-0 bg-[#00000080] flex items-center justify-center">
           <div
             ref={modalRef}
@@ -170,7 +192,7 @@ const PopularProducts = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

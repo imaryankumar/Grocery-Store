@@ -10,6 +10,7 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import CartProductList from "@/utils/CartProductList";
+import Cookies from "js-cookie";
 import { MdOutlineToggleOff, MdOutlineToggleOn } from "react-icons/md";
 import { toggleDarkMode } from "@/libs/features/darkModeSlice";
 import { LoaderIcon } from "react-hot-toast";
@@ -23,6 +24,8 @@ const Headers = () => {
   const slidebarRef = useRef();
   const dispatch = useDispatch();
   const router = useRouter();
+  const token = Cookies.get("userToken");
+
   const cartItems = useSelector((state) => state.cart);
   // console.log("DarkMode", mode);
   // console.log("cartItems===>", cartItems);
@@ -151,17 +154,21 @@ const Headers = () => {
             className="display-flex gap-3 cursor-pointer select-none"
             onClick={onSlideModalOpen}>
             <RiShoppingBag3Line size={35} />
-            <span className="text-2xl">
+            {/* <span className="text-2xl">
               {cartItems.reduce((sum, item) => sum + item.products, 0)}
-            </span>
+            </span> */}
           </div>
           <button
-            className="bg-green-500 text-white rounded px-6 py-2"
-            onClick={onLoginBtnHandler}>
+            className="bg-green-500 text-white rounded px-6 py-2 flex items-center justify-center"
+            onClick={onLoginBtnHandler}
+            disabled={isLoading} // Optionally disable the button when loading
+          >
             {isLoading ? (
-              <span className="w-full h-full flex items-center justify-center py-2 px-[19px]">
+              <span className="flex items-center justify-center py-2 px-5">
                 <LoaderIcon />
               </span>
+            ) : token ? (
+              "Profile"
             ) : (
               "Login"
             )}
@@ -184,7 +191,7 @@ const Headers = () => {
             onClick={onMyCartHandler}>
             My Cart
           </button>
-          <div className="w-full h-full flex flex-col items-center justify-start gap-2 py-4 ">
+          {/* <div className="w-full h-full flex flex-col items-center justify-start gap-2 py-4 ">
             {cartItems?.map((item) => {
               return (
                 <CartProductList
@@ -197,7 +204,7 @@ const Headers = () => {
                 />
               );
             })}
-          </div>
+          </div> */}
         </div>
       </div>
     </>
